@@ -26,7 +26,7 @@ public class SparkStream {
                 kafkaParams.put("auto.offset.reset", "latest");
                 kafkaParams.put("enable.auto.commit", false);
 
-                Collection<String> topics = Arrays.asList("topicA", "topicB");
+                Collection<String> topics = Arrays.asList("replication-test", "topicB");
 
                 SparkConf conf = new SparkConf().setMaster("local[2]").setAppName("NetworkWordCount");
                 JavaStreamingContext streamingContext = new JavaStreamingContext(conf, Durations.seconds(1));
