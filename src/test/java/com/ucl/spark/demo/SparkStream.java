@@ -48,5 +48,6 @@ public class SparkStream {
                                 System.out.println("partitionId: " + TaskContext.get().partitionId());
                         });
                 });
+
         }
 }
