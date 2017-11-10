@@ -27,10 +27,11 @@ public class App {
                 new Applicant(5, "Jane", "Stuart", 10, 788)
         );
 
-        String libPath = "F:\\sprark-demo-lib\\lib";
-        String[] jars = FileUtil.getFileArray(libPath);
-//        SparkConf conf = new SparkConf().setMaster("local").setAppName("Simple Application").setJars(jars);
+        String libPath = "F:\\sprark-demo-lib\\lib\\";
+//        String[] jars = FileUtil.getFileArray(libPath);
+        String[] jars = new String[]{"F:/sprark-demo-lib/lib/spark-core_2.11-2.2.0.jar"};
 
+//        SparkConf conf = new SparkConf().setMaster("local").setAppName("Simple Application").setJars(jars);
         SparkConf conf = new SparkConf().setMaster("spark://10.1.210.50:7077").setAppName("NetworkWordCount").setJars(jars);
         JavaSparkContext sc = new JavaSparkContext(conf);
 

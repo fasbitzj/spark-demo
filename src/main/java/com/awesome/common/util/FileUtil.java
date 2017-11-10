@@ -16,7 +16,7 @@ public class FileUtil {
         File[] array = file.listFiles();
         for(int i=0;i<array.length;i++){
             if(array[i].isFile()){
-                fileNameList.add(array[i].getName());
+                fileNameList.add(path + array[i].getName());
             }else if(array[i].isDirectory()){
                 getFileArray(array[i].getPath());
             }
