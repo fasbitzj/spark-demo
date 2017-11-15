@@ -1,0 +1,17 @@
+package com.ucl.spark;
+
+import com.ucl.spark.demo.Applicant
+
+rule "Approve Good Credit"
+  when 
+    a: Applicant( creditScore > 600 )
+  then
+    a.setApproved( true );
+end 
+
+rule "Approve Bad Credit"
+  when
+    a: Applicant( creditScore <= 600 )
+  then
+    a.setApproved( false );
+end

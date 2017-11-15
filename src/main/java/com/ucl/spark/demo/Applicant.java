@@ -1,9 +1,11 @@
-package com.awesome.demo;
+package com.ucl.spark.demo;
+
+import java.io.Serializable;
 
 /**
  * Created by jiang.zheng on 2017/11/9.
  */
-public class Applicant {
+public class Applicant implements Serializable {
 
     private String firstName;
     private String lastName;
@@ -68,5 +70,17 @@ public class Applicant {
 
     public void setApproved(boolean approved) {
         this.approved = approved;
+    }
+
+    @Override
+    public String toString() {
+        return "Applicant{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", id=" + id +
+                ", requestAmount=" + requestAmount +
+                ", creditScore=" + creditScore +
+                ", approved=" + approved +
+                '}';
     }
 }

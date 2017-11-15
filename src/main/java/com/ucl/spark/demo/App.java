@@ -1,6 +1,5 @@
-package com.awesome.demo;
+package com.ucl.spark.demo;
 
-import com.awesome.common.util.FileUtil;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -27,22 +26,23 @@ public class App {
                 new Applicant(5, "Jane", "Stuart", 10, 788)
         );
 
-        String libPath = "F:\\sprark-demo-lib\\lib\\";
-//        String[] jars = FileUtil.getFileArray(libPath);
-        String[] jars = new String[]{"F:/sprark-demo-lib/lib/spark-core_2.11-2.2.0.jar"};
-
-//        SparkConf conf = new SparkConf().setMaster("local").setAppName("Simple Application").setJars(jars);
-        SparkConf conf = new SparkConf().setMaster("spark://10.1.210.50:7077").setAppName("NetworkWordCount").setJars(jars);
+        SparkConf conf = new SparkConf().setMaster("local").setAppName("Simple Application");
+//        SparkConf conf = new SparkConf().setMaster("spark://10.1.210.50:7077").setAppName("NetworkWordCount");
         JavaSparkContext sc = new JavaSparkContext(conf);
-
-        KieBase rules = loadRules();
-        Broadcast<KieBase> broadcastRules = sc.broadcast(rules);
 
         JavaRDD<Applicant> applicants = sc.parallelize(inputData);
 
+        KieBase rules = loadRules();
+        Broadcast<KieBase> broadcastRules = sc.broadcast(rules);
         long numApproved = applicants.map( a -> applyRules(broadcastRules.value(), a) )
-                .filter( a -> a.isApproved() )
+                .filter(a -> a.isApproved())
                 .count();
+
+        /*KieContainer kContainer = loadRules();
+        for (int i=0; i<inputData.size(); i++) {
+            applyRules(kContainer, inputData.get(i));
+            System.out.println(inputData.get(i));
+        }*/
 
         System.out.println("Number of applicants approved: " + numApproved);
     }
@@ -59,4 +59,16 @@ public class App {
         session.execute(CommandFactory.newInsert(a));
         return a;
     }
+
+    /*public static KieContainer loadRules() {
+        KieServices kieServices = KieServices.Factory.get();
+        KieContainer kContainer = kieServices.getKieClasspathContainer();
+        return kContainer;
+    }
+
+    public static Applicant applyRules(KieContainer kContainer, Applicant a) {
+        StatelessKieSession kSession = kContainer.newStatelessKieSession();
+        kSession.execute(a);
+        return a;
+    }*/
 }

@@ -5,3 +5,5 @@
 *.xml
 .idea/libraries/Maven__com_101tec_zkclient_0_8.xml
 .idea/compiler.xml
+spark-demo.iml
+.idea/.name
