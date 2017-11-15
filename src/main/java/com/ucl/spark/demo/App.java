@@ -38,9 +38,8 @@ public class App {
                 .filter(a -> a.isApproved())
                 .count();
 
-        /*KieContainer kContainer = loadRules();
-        for (int i=0; i<inputData.size(); i++) {
-            applyRules(kContainer, inputData.get(i));
+        /*for (int i=0; i<inputData.size(); i++) {
+            applyRules(broadcastRules.value(), inputData.get(i));
             System.out.println(inputData.get(i));
         }*/
 
