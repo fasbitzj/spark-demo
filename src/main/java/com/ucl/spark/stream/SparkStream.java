@@ -1,4 +1,4 @@
-package com.ucl.spark.demo;
+package com.ucl.spark.stream;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.serialization.StringDeserializer;
