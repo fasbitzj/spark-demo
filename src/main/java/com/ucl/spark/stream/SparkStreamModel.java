@@ -30,9 +30,10 @@ public class SparkStreamModel {
         kafkaParams.put("enable.auto.commit", false);
 
         SparkConf sparkConf = new SparkConf().setAppName("main.java.computingCenter").setMaster("local[2]");
+//        SparkConf sparkConf = new SparkConf().setMaster("spark://10.1.210.50:7077").setAppName("computingCenter");
         // Create the context with 2 seconds batch size
         //每两秒读取一次kafka
-        JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, Durations.seconds(10));
+        JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, Durations.seconds(2));
 
         Collection<String> topics = Arrays.asList("replication-threadA", "replication-threadB");
 
@@ -44,8 +45,13 @@ public class SparkStreamModel {
                 );
 
         JavaDStream<String> lines = stream.map(record -> {return record.value();});
+//        JavaDStream<String> lines = stream.flatMap(x -> Arrays.asList(x.value().toString().split(" ")).iterator());
+
+//        JavaRDD<Applicant> apps = stream.foreachRDD(new);
+
         lines.foreachRDD(o -> {
-            System.out.println("rdd:" + o.count());
+            o.foreach(x -> System.out.println("x:" + x));
+            System.out.println("o.count:" + o.count());
         });
         System.out.println("lines: " + lines);
         jssc.start();

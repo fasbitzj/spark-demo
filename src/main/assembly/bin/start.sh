@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## main class for execute
-MAIN_CLASS="com.ucl.BootApplication"
+MAIN_CLASS="com.ucl.spark.stream.SparkStreamModel"
 
 cd `dirname $0`
 BIN_DIR=`pwd`

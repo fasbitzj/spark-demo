@@ -1,6 +1,6 @@
 @echo off & setlocal enabledelayedexpansion
 
-set MAIN_CLASS="com.ucl.BootApplication"
+set MAIN_CLASS="com.ucl.spark.stream.SparkStreamModel"
 set LIB_JARS=""
 cd ..\lib
 for %%i in (*) do set LIB_JARS=!LIB_JARS!;..\lib\%%i
